@@ -1,5 +1,11 @@
 ---
+import { getImage } from 'astro:assets';
 import TAGS from "./Tags.js"
+
+// Import project images
+import cimubbImage from '../assets/projects/CIMUBB.webp';
+import labconImage from '../assets/projects/labcon.webp';
+import adesupImage from '../assets/projects/adesupWeb.webp';
 
 const PROJECTS = [
   {
@@ -8,7 +14,7 @@ const PROJECTS = [
      "Aplicación móvil desarrollada con Java en Android Studio que permite la transcripción de datos bidireccional con Arduino, RS232 + Bluetooth para el manejo de un brazo robótico, en reemplazo de su sistema manual con botonera.",
     link: "https://github.com/Gyro1203/Botonera.git",
     github: "",
-    image: "/projects/CIMUBB.webp",
+    image: cimubbImage,
     tags: [TAGS.JAVA, TAGS.CMM],
   },
   {
@@ -17,7 +23,7 @@ const PROJECTS = [
      "Sistema de gestión de asistencia para Laboratorios de Ciencias de la Construcción, permitiendo a los estudiantes registrar su entrada y salida, facilitando el seguimiento y control de asistencia en tiempo real.",
     link: "https://github.com/Gyro1203/LabCC.git",
     github: "",
-    image: "/projects/labcon.webp",
+    image: labconImage,
     tags: [TAGS.MYSQL, TAGS.JAVASCRIPT, TAGS.NODE, TAGS.EXPRESS, TAGS.REACT, TAGS.NEXT, TAGS.VITE, TAGS.BOOTSTRAP],
   },
   {
@@ -26,20 +32,28 @@ const PROJECTS = [
      "Desarrollo de una plataforma web y aplicación móvil para la Asociación Deportiva de la Educación Superior (ADESUP), facilitando la gestión de eventos y comunicación entre estudiantes.",
     link: "",
     github: "",
-    image: "/projects/adesupWeb.webp",
+    image: adesupImage,
     tags: [TAGS.MYSQL, TAGS.WP, TAGS.FLUTTER],
   },
 ]
+
+// Optimize all images
+const optimizedProjects = await Promise.all(
+  PROJECTS.map(async (project) => ({
+    ...project,
+    optimizedImage: await getImage({ src: project.image })
+  }))
+);
 ---
 
 {
-  PROJECTS.map(({title, description, tags, image  }) => (
+  optimizedProjects.map(({title, description, tags, optimizedImage  }) => (
     <article class="mb-16">
       <h3 class="text-2xl px-4 font-semibold text-shadow-md text-shadow-blue-500 mb-2">{title}</h3>
       <p class="text-lg mb-4 px-4 text-pretty">{description}</p>
       <img 
         class="mx-auto rounded shadow-2xl shadow-fuchsia-900/35 mt-6" 
-        src={image} alt={`Captura de pantalla de proyecto ${title}`} 
+        src={optimizedImage.src} alt={`Captura de pantalla de proyecto ${title}`} 
       />
       <ul class="flex gap-x-2 flex-row mt-6">
         {tags.map((tag) => (
