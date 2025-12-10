@@ -1,0 +1,18 @@
+---
+import TAGS from "./Tags.js"
+
+---
+
+<p class="text-lg mb-10 px-4 text-pretty">Esto son algunos de los lenguajes y tecnologías que conozco y he utilizado:</p>
+<article class="rounded-2xl border border-white bg-white/5 p-6 flex flex-wrap justify-center">
+  {
+    Object.values(TAGS).map((tag) => (
+      <figure class={`inline-flex gap-x-2 mx-5 my-3 w-20`}>
+        <span class="flex flex-col items-center">
+          <tag.icon class="size-18 mb-2"/>
+          {tag.name}
+        </span>
+      </figure>
+    ))
+  }
+</article>

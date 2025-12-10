@@ -1,0 +1,56 @@
+---
+import TAGS from "./Tags.js"
+
+const PROJECTS = [
+  {
+    title: "APP Movil - Conexion con brazo robotico via Bluetooth",
+    description:
+     "Aplicación móvil desarrollada con Java en Android Studio que permite la transcripción de datos bidireccional con Arduino, RS232 + Bluetooth para el manejo de un brazo robótico, en reemplazo de su sistema manual con botonera.",
+    link: "https://github.com/Gyro1203/Botonera.git",
+    github: "",
+    image: "/projects/CIMUBB.webp",
+    tags: [TAGS.JAVA, TAGS.CMM],
+  },
+  {
+    title: "LABCON Attendance System",
+    description:
+     "Sistema de gestión de asistencia para Laboratorios de Ciencias de la Construcción, permitiendo a los estudiantes registrar su entrada y salida, facilitando el seguimiento y control de asistencia en tiempo real.",
+    link: "https://github.com/Gyro1203/LabCC.git",
+    github: "",
+    image: "/projects/labcon.webp",
+    tags: [TAGS.MYSQL, TAGS.JAVASCRIPT, TAGS.NODE, TAGS.EXPRESS, TAGS.REACT, TAGS.NEXT, TAGS.VITE, TAGS.BOOTSTRAP],
+  },
+  {
+    title: "Plataforma Web y Movil ADESUP",
+    description:
+     "Desarrollo de una plataforma web y aplicación móvil para la Asociación Deportiva de la Educación Superior (ADESUP), facilitando la gestión de eventos y comunicación entre estudiantes.",
+    link: "",
+    github: "",
+    image: "/projects/adesupWeb.webp",
+    tags: [TAGS.MYSQL, TAGS.WP, TAGS.FLUTTER],
+  },
+]
+---
+
+{
+  PROJECTS.map(({title, description, tags, image  }) => (
+    <article class="mb-16">
+      <h3 class="text-2xl px-4 font-semibold text-shadow-md text-shadow-blue-500 mb-2">{title}</h3>
+      <p class="text-lg mb-4 px-4 text-pretty">{description}</p>
+      <img 
+        class="mx-auto rounded shadow-2xl shadow-fuchsia-900/35 mt-6" 
+        src={image} alt={`Captura de pantalla de proyecto ${title}`} 
+      />
+      <ul class="flex gap-x-2 flex-row mt-6">
+        {tags.map((tag) => (
+          <li>
+            <span class={`flex gap-x-2 rounded-full text-xs justify-center items-center ${tag.class} px-2 py-1`}>
+              <tag.icon class="size-8 "/>
+              {tag.name}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </article>
+  ))
+}
