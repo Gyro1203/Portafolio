@@ -5,6 +5,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  
+  site: "https://Gyro1203.github.io",
+
   // Base URL para GitHub Pages (repo name)
   base: '/Portafolio/',
   
